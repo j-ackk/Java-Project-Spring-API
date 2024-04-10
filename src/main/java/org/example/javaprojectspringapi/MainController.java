@@ -26,6 +26,7 @@ public class MainController {
      * @return JSON of all Books
      */
     @GetMapping(path = BOOK)
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     Iterable<Book> getAllBooks(){
         return bookRepository.findAll();
@@ -37,6 +38,7 @@ public class MainController {
      * @return JSON of Book with matching ISBN
      */
     @GetMapping(path = BOOK+"/{isbn}")
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     Book getBookWithId(@PathVariable String isbn){
         return bookRepository.findByIsbn(isbn);
@@ -52,6 +54,7 @@ public class MainController {
      * @return Saved if successful, Author not found if not
      */
     @PostMapping(path = BOOK)
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     String addNewBook(@RequestParam String isbn, @RequestParam String title, @RequestParam int editionNumber, @RequestParam String copyright, @RequestParam Integer author_id){
         Book book = new Book();
@@ -73,6 +76,7 @@ public class MainController {
      * @return JSON of All Authors
      */
     @GetMapping(path = AUTHORS)
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     Iterable<Author> getAllAuthors(){
         return authorRepository.findAll();
@@ -84,6 +88,7 @@ public class MainController {
      * @return Author with matching ID
      */
     @GetMapping(path = AUTHORS+"/{author_id}")
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     Optional<Author> getAuthorWithId(@PathVariable Integer author_id){
         return authorRepository.findById(author_id);
@@ -96,6 +101,7 @@ public class MainController {
      * @return Saved if successful
      */
     @PostMapping(path = AUTHORS)
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     String addNewAuthor(@RequestParam String firstName, @RequestParam String lastName){
         Author author = new Author();
@@ -113,6 +119,7 @@ public class MainController {
      * @return Author updated if successful, Author not found if not
      */
     @PutMapping(path = AUTHORS+"/{author_id}")
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     String updateAuthor(@PathVariable Integer author_id, @RequestParam String firstName, @RequestParam String lastName){
         Optional<Author> author = authorRepository.findById(author_id);
@@ -132,6 +139,7 @@ public class MainController {
      * @return Deleted if successful, Author not found if not
      */
     @DeleteMapping(path = AUTHORS+"/{author_id}")
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     String deleteAuthor(@PathVariable Integer author_id){
         Optional<Author> author = authorRepository.findById(author_id);
@@ -151,6 +159,7 @@ public class MainController {
      * @return Book Updated if successful, Book not found if not
      */
     @PutMapping(path = BOOK+"/{isbn}")
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     String updateBook(@PathVariable String isbn, @RequestParam String copyright, @RequestParam Integer edition_number, @RequestParam String title){
         Optional<Book> book = Optional.ofNullable(bookRepository.findByIsbn(isbn));
@@ -171,6 +180,7 @@ public class MainController {
      * @return Book Deleted if successful, Book Not Found if not
      */
     @DeleteMapping(path = BOOK+"/{isbn}")
+    @CrossOrigin(origins = "*")
     public @ResponseBody
     String deleteBook(@PathVariable String isbn){
         Optional<Book> book = Optional.ofNullable(bookRepository.findByIsbn(isbn));
